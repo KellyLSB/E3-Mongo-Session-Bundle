@@ -131,7 +131,7 @@ class Bundle {
 		
 		$this->_key 		= $session->key;
 		$this->_id			= $session->_id;
-		$this->_data		= $session->__toArray();
+		$this->_data		= $session->data;
 		$this->_data_hash	= md5(serialize($this->_data));
 		$this->_flashdata	= isset($this->_data['flashdata']) ? $this->_data['flashdata'] : array();
 
@@ -356,7 +356,7 @@ class Bundle {
 		
 		if(md5(serialize($this->_data)) !== $this->_data_hash)
 			$session->data = $this->_data;
-		
+
 		$session->save();
 	}
 	
