@@ -357,7 +357,8 @@ class Bundle {
 		if(md5(serialize($this->_data)) !== $this->_data_hash)
 			$session->data = $this->_data;
 
-		$session->save();
+		if(method_exists($session, 'save'))
+			$session->save();
 	}
 	
 	/**
@@ -383,7 +384,7 @@ class Bundle {
 			
 			if($this->_log_hit) {
 				$this->_session->last_hit = $this->_hit->id;
-				$this->_session->save();
+				$this->save();
 			}
 
 			else if($this->_child_hit) {
