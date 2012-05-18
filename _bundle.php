@@ -378,9 +378,9 @@ class Bundle {
 			if(isset($_SERVER['HTTP_REFERER']))
 				$this->_hit->referer = $_SERVER['HTTP_REFERER'];
 
-			$this->_hit->sessionID = $this->_id;
+			$this->_hit->sessionID = $this->_session->_id;
 			
-			$this->_hit->save();
+			$this->_hit->save(array(), true);
 			
 			if($this->_log_hit) {
 				$this->_session->last_hit = $this->_hit->id;
@@ -389,7 +389,7 @@ class Bundle {
 
 			else if($this->_child_hit) {
 				$this->_hit->parent = $this->_session->last_hit;
-				$this->_hit->save();
+				$this->_hit->save(array(), true);
 			}
 		}
 		
