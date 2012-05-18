@@ -226,7 +226,7 @@ class Bundle {
 	private function _get() {
 		$session = e::mongodb()->model('_sessions', array('key' => $this->_cookie));
 
-		if(!$session) return $this->_create();
+		if(!$session->_id) return $this->_create();
 		return $session;
 	}
 	
