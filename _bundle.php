@@ -28,10 +28,6 @@ class Bundle {
 	/**
 	 * Hits Information
 	 */
-
-
-
-
 	private $_key;
 	public $_id;
 	private $_log_hit = true;
@@ -533,6 +529,13 @@ class Bundle {
 	 * Checks to see if we are handling a robot
 	 */
 	private function _is_robot() {
+
+		/**
+		 * Hack for disabling sessions if no MongoDB DSN is found
+		 */
+		if(e::mongodb()->isAvailable() === false)
+			return true;
+
 		$robot = false;
 		foreach(self::$_robots as $bot) {
 			if(strpos($_SERVER['HTTP_USER_AGENT'], $bot) !== false) {
